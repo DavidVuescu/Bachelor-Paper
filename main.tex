@@ -1,0 +1,104 @@
+\documentclass[12pt,a4paper]{book}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{amsmath,amsthm,amssymb,graphicx,hyperref}
+\usepackage[left=1.2in,right=1.2in,top=1in,bottom=1in]{geometry}
+%\usepackage[romanian]{babel}
+\usepackage[english]{babel}
+\usepackage{xcolor}
+\usepackage{paralist}
+\RequirePackage{hyphenat}
+\usepackage{algorithmic, algorithm}
+\usepackage[inline]{enumitem}
+%\usepackage{...insert other packages here...}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{exmp}{Example}[section]
+\begin{document}
+\sloppy
+
+\thispagestyle{empty}
+\begin{center}
+\begin{figure}[h!]
+\vspace{-20pt}
+\begin{center}
+\includegraphics[width=100pt]{FMI-03.png}
+\end{center}
+\end{figure}
+
+
+{\large{\bf WEST UNIVERSITY OF TIMI\c SOARA
+
+FACULTY OF MATHEMATICS AND COMPUTER SCIENCE
+
+BACHELOR STUDY PROGRAM:  Applied Computer Science}}
+
+\vspace{120pt}
+{\huge {\bf BACHELOR THESIS}}
+
+\vspace{160pt}
+\end{center}
+
+{\large\noindent{\bf SUPERVISOR:
+\hspace{172pt} GRADUATE: }
+
+\noindent Conf. Dr. Cosmin Bonchis \hfill 
+\noindent  Mihai-David Vuescu
+}
+
+\vfill
+\begin{center}
+{\bf TIMI\c SOARA
+
+2023}
+\end{center}
+\newpage
+\thispagestyle{empty}
+\begin{center}
+{\large{\bf WEST UNIVERSITY OF TIMI\c SOARA
+		
+FACULTY OF MATHEMATICS AND COMPUTER SCIENCE
+		
+BACHELOR STUDY PROGRAM:  Applied Computer Science}}
+
+\vspace{200pt}
+{\huge {\bf B.C.I. Applications Platform }}
+
+\vspace{153pt}
+\end{center}
+
+{\large\noindent{\bf SUPERVISOR:\hfill GRADUATE:}
+
+\noindent Conf. Dr. Cosmin Bonchis\hfill
+\noindent Mihai-David Vuescu}
+ 
+
+\vfill
+\begin{center}
+{\bf TIMI\c SOARA
+
+2023}
+\end{center}
+
+\newpage
+\normalsize{}
+
+\section*{Description} 
+\hspace{\parindent} The bachelor work consists in realising a platform that works in conjunction with a Brain Computer Interface, specifically the Unicorn Hybrid Black BCI[], to facilitate access to specific applications. The platform's aim is to improve accessibility for a disabled person that is using a BCI as follows: normally when changing between applications the disabled subject must wait for an able-bodied helper to change applications and recalibrate the EEG. By creating a platform that removes the need for said helper, the end-user benefits from more freedom in interacting with his favourite apps. 
+
+\vspace*{2mm}
+\hspace{\parindent} The apps used to demonstrate the platform will be taken (with permission) from UVT's submissions in the br41n.io hackathons, in which students competed with ideas for applications such as the ones being used.
+
+
+
+\tableofcontents
+\input{introduction.tex}
+\input{cap2}
+\bibliography{mybib}
+\bibliographystyle{alpha}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\end{document} 
