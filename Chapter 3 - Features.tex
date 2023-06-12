@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% cap: features %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Application Features}\label{cap:features}
+
+%%%%%%%%%%%% Section: Features %%%%%%%%%%%%
+\section{Features}\label{sect:features}
+\textbf{Seamless integration with Unicorn Hybrid Black}. The application will be designed to work with gTec's unicorn technology seamlessly. The end user will only have to configure the BCI for the specific end-user and afterwards everything is smooth sailing.
+
+\vspace*{2mm}
+\textbf{Friendly Dynamic UI}. The platform itself will have an easy to navigate graphical user interface for both the BCI user and the helper. The platform will also be able to refresh to accomodate newly added and/or freshly deleted applications. This way. This way, no lousy restarts of the whole application will be needed to make the platform show new applications. This also works well in limiting errors, since deleted applications will dissapear entirely, making it impossible for the BCI user to select an application that isn't there anymore.
+
+\vspace*{2mm}
+\textbf{Drag and drop}. Adding new applications and deleting existing ones should be as easy as dragging and dropping the application in the apps folder or deleting an existing app. The platform can recognise this and adapt accordingly.
+
+\vspace*{2mm}
+\textbf{Helper button}. If the BCI user wishes to call the helper, the platform can facilitate that via a button that alerts the user's caretaker using noise.
+
+\newpage
+
+
+%%%%%%%%%%%% Section: Features %%%%%%%%%%%%
+\section{Implementation Details}\label{sect:implement_details}
+\textbf{Visual C\#}. The GUI is built using visual C\#. This is to ensure stability and an easy way to add new features down the line. Different styles are also used to make the interface visually appealing to the end-user.
+
+\vspace*{2mm}
+\textbf{Local app storage}. The different applications are stored locally. This makes it easier for the user's helper to add and remove them when the need arises.
+
+\vspace*{2mm}
+\textbf{Unicorn Speller}. The app makes use of the pre-existing unicorn speller software with a custom board made for the application platform. The speller board gives the BCI user all necessary input while using the application and is initialised when the application starts.
+
+\vspace*{2mm}
+\textbf{UDP port listener}. To ensure communication between the platform itself and the unicorn speller, the two major components of this bachelor's work, a UDP listener is implemented in the platform logic. The listener awaits for input from the speller on a specific port and once it receives it sends the signal further along to the platform which reacts accordingly. Once an application is open, it uses its own means of listening to the user input.

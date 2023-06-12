@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{book}
+\documentclass[12pt,a4paper,openany]{book}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 \usepackage{amsmath,amsthm,amssymb,graphicx,hyperref}
 \usepackage[left=1.2in,right=1.2in,top=1in,bottom=1in]{geometry}
@@ -17,6 +17,8 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}[section]
 \newtheorem{exmp}{Example}[section]
+\title{BCI Applications Platform}
+\author{Mihai-David Vuescu}
 \begin{document}
 \sloppy
 
@@ -83,13 +85,16 @@ BACHELOR STUDY PROGRAM:  Applied Computer Science}}
 2023}
 \end{center}
 
-\newpage
-\normalsize{}
+% \newpage
+% \normalsize{}
 
 
 \tableofcontents
+\input{Chapter 0 - Abstract.tex}
 \input{Chapter 1 - Introduction.tex}
-\input{Chapter 2 - Architecture.tex}
+\input{Chapter 2 - Theoretical Basis}
+\input{Chapter 3 - Features}
+
 \bibliography{bibliography}
 \bibliographystyle{alpha}
 \addcontentsline{toc}{chapter}{Bibliography}
