@@ -9,7 +9,15 @@
 \RequirePackage{hyphenat}
 \usepackage{algorithmic, algorithm}
 \usepackage[inline]{enumitem}
-%\usepackage{...insert other packages here...}
+\usepackage{fancyhdr}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% Clear header and footer
+  \renewcommand{\headrulewidth}{0pt}% Remove header rule
+}
+%\setcounter{tocdepth}{3}
+%\setcounter{secnumdepth}{3}
+
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \theoremstyle{definition}
@@ -17,8 +25,12 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}[section]
 \newtheorem{exmp}{Example}[section]
+
 \title{BCI Applications Platform}
 \author{Mihai-David Vuescu}
+
+
+
 \begin{document}
 \sloppy
 
@@ -96,7 +108,7 @@ BACHELOR STUDY PROGRAM:  Applied Computer Science}}
 \input{Chapter 3 - Features}
 
 \bibliography{bibliography}
-\bibliographystyle{alpha}
+\bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{Bibliography}
 
 \end{document} 
