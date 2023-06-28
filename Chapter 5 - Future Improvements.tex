@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% cap: future %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Future Improvements}\label{cap:future}
+Even though the project and this work is complete, there is still room for growth and the possibility of adding new features and improving existing ones. In this chapter we will explore possible future developments for both the platform itself and the installer tool.
+
+\section{Platform}
+\subsection{Dynamically Changing Boards}
+The biggest limitation in creating this project was the fact that Unicorn software doesn't let a developer change boards during the run-time of the P300 speller. This makes sense from a technical standpoint, as all sorts of bugs and unwanted behaviour could result from just flipping the board around while the speller program is in execution, but it is nonetheless something that can be improved upon.
+\vspace{\baselineskip}\newline
+An improvement in this sense could come from a smart script that changes boards dynamically when the user opens a new application. In this way, the main board can be simplified into several smaller boards, that aren't as tiring on the eyes and that could allow longer use of the platform without pause. Another way of realising this improvement could be through the use of external spellers or though the use of the Unity API from g.tec, which allows users to create smart Game Objects inside the engine that act just like items on a speller. 
+\vspace{\baselineskip}\newline
+There isn't one simple answer or way of improving upon this existing issue while keeping stability and functionality. This matter needs a lot more testing before it can be implemented into such an application, but it is nevertheless an improvement from which the platform could benefit.
+
+\subsection{Support for Different Spellers/BCIs}
+In trying to create a homogeneous system of compatible applications all linked through one and documenting it in this paper, only one BCI and one speller were used. Other research-oriented platforms have numerous integrations with a plethora of Brain Computer Interfaces available on the market. In creating this paper however, I was limited to only one piece of hardware, the BCI provided by Unicorn. While it was more than enough to create the platform and run the necessary tests, it can't be denied that in the future, the platform can be improved upon by developing integrations with other BCI hardware.
+
+
+
+\section{Installer}
+\subsection{Over-the-Air Updates}
+Over-the-Air updates, or OTA updates for short are updates that do not require manual intervention from any user. They enable the user to receive firmware updates seamlessly via network. They are most commonly used in Android and IOS updates, as well as Windows and other computer updates.
+\vspace{\baselineskip}\newline
+While the installer is an useful tool for interfacing with batch scripts to download the platform and the applications, OTA updates could prove a wonderful improvement, so as to not have the user always checking for new versions in case new applications are made available for installation. This way, the installer can update itself by downloading the latest version of the installer binary from GitHub.
+
+\subsection{Alternative File Hosting Platforms}
+Although GitHub is one of the biggest and most used Git websites, it is not infallible. Servers can crash, the website may go down for a brief or a longer period of time, and while that happens, no alternative exists for downloading applications. While GitHub has excellent up-time records as of the writing of this thesis, outages do occur. In this sense, a future development would be the addition of alternatives, so that in the case of an outage, the batch scripts can just use the alternative link(s) to download the same file. While it doesn't seem much, this would ensure increased reliability along the line 
