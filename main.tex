@@ -10,6 +10,9 @@
 \usepackage{algorithmic, algorithm}
 \usepackage[inline]{enumitem}
 \usepackage{fancyhdr}
+\usepackage{listings}
+\lstloadlanguages{C,C++,csh,Java}
+\usepackage{color}
 
 \fancypagestyle{plain}{%
   \fancyhf{}% Clear header and footer
@@ -17,6 +20,16 @@
 }
 %\setcounter{tocdepth}{3}
 %\setcounter{secnumdepth}{3}
+
+\definecolor{red}{rgb}{0.6,0,0} 
+\definecolor{blue}{rgb}{0,0,0.6}
+\definecolor{green}{rgb}{0,0.8,0}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{mycream}{RGB}{255, 250, 240}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
@@ -100,12 +113,32 @@ BACHELOR STUDY PROGRAM:  Applied Computer Science}}
 % \newpage
 % \normalsize{}
 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
 
 \tableofcontents
 \input{Chapter 0 - Abstract.tex}
 \input{Chapter 1 - Introduction.tex}
 \input{Chapter 2 - Theoretical Basis}
-\input{Chapter 3 - Features}
+\input{Chapter 3 - Creating a BCI Application Platform}
 
 \bibliography{bibliography}
 \bibliographystyle{unsrt}
