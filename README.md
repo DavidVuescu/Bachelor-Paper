@@ -1,25 +1,25 @@
-# Bachelor-Paper
+1# Bachelor-Paper
 
 ### Content Requirements:
-❌Summary  
+✅Summary  
 ✅Introduction  
-❌Describing the issue  
-🍪Existing solutions  
-🍪App Architecture  
-❌App Features  
-❌Implementation Details  
+✅Describing the issue  
+✅Existing solutions  
+✅App Architecture  
+✅App Features  
+✅Implementation Details  
 ✅Use Cases  
-❌Conclusions  
-❌Further Improvements  
+✅Conclusions  
+✅Further Improvements  
 
 
 ### Number of Pages Required:
-❌30-40 pages sans title pages, table of contents, bibliography and annexed docs  
+🍪30-40 pages sans title pages, table of contents, bibliography and annexed docs  
 
 ### What should be underlined:
-❌The relevance of the problem and the solution found for said problem  
-❌App features (and MO of said features)  
-❌Particularities of the implementation  
+✅The relevance of the problem and the solution found for said problem  
+✅App features (and MO of said features)  
+✅Particularities of the implementation  
    
    
    
