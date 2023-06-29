@@ -1,16 +1,16 @@
 1# Bachelor-Paper
 
 ### Content Requirements:
-✅Summary  
+☑️Summary  
 ✅Introduction  
 ✅Describing the issue  
-✅Existing solutions  
+☑️Existing solutions  
 ✅App Architecture  
 ✅App Features  
-✅Implementation Details  
+☑️Implementation Details  
 ✅Use Cases  
-✅Conclusions  
-✅Further Improvements  
+☑️Conclusions  
+☑️Further Improvements  
 
 
 ### Number of Pages Required:
