@@ -29,7 +29,7 @@ As such, numerous applications are being developed for BCI users. The applicatio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objectives}\label{sect:objectives}
 From a general standpoint, the main objective of the platform is described in the above section of this paper: making a cohesive application that integrates with a well-known BCI speller to deliver seamless access to different apps for a disabled user. The platform should be intuitive and easy to use, such as no explanations should be needed before using the platform. 
-\vspace{\baselineskip}\ newline 
+\vspace{\baselineskip}\newline 
 From a technical standpoint, this project aims to create a stable system capable of housing a considerable quantity of applications without failure. Due to the platform relying on multiple components (the speller, the individual applications, the speller receiver, and the platform logic itself), multiple points of failure exist. In the case of an unhandled crash, an able-bodied helper is once again needed, thus defeating the general purpose of the app. As such, error handling inside the application is the priority. 
 \vspace{\baselineskip}\newline
 When it comes to compatibility, the objective is to make apps integrate with the platform. This requires modifying the apps to be contained inside the platform to make them compatible. To reach this objective without compromising the aforementioned two, the platform will require as little tinkering on the application side as possible, ensuring that adding a new application is as easy as dragging and dropping its folder into the platform's own. The installation of new applications within the platform will fall into the hands of an able-bodied person, this is one of the limitations of the platform. 
@@ -58,3 +58,30 @@ OpenViBE is an open-source software platform dedicated to designing, testing and
 Other platforms and systems housing BCI tools exist. Research papers such as BCI Software Platforms(Brunner et al., 2012) list 7 publicly available software platforms for brain-computer interfaces, as well as possible synergies and future developments, such as combining different components of different platforms\cite{Brunner_2012}. Other papers such as Research of Auxiliary Game Platform Based on BCI Technology(Jiang et al., 2009) present a solution for controlling video games by BCI using motor imagery, translating the motor imagery EEG into three control signals: left, right or stop; a simple game player can use it as an input device of to realise the function of operating games\cite{Jiang_2009}.
 \vspace{\baselineskip}\newline
 As the field of brain-computer interfacing alongside other related fields such as neuroscience, biomedical engineering and computer science advance, more solutions will be available for the public at large to experiment with. Within 60 years, the field has moved from simple artefact-sensitive EEG to making real the vision of brain-computer communication, resulting in long-term at-home usage for patients with locked-in syndrome\cite{K_bler_2019}. More innovation will bring different new implementations and similar solutions, as BCI as an assistive technology will likely be perceived as an integral part of life in the decades to come\cite{K_bler_2019}.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Section: Similar Solutions %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scope of Contribution}\label{sect:Scope of Contribution}
+
+This section aims to outline my contributions to the works already existing at the time of writing the present work. This is necessary because the platform created as a result of this work is based on closed-source software to which I had no contribution and which I did not and could not modify. In this section, I will not mention the hardware used as none of it is of my making, instead being built and tested by g.tec Austria.
+
+
+\subsection{Foundational Works}
+First and foremost, the foundation upon which the platform is based is the Unicorn Software Suite, specifically the Unicorn Speller. None of the code inside the speller is my own. I did not modify any of the code because the Unicorn software is closed-source. Furthermore, the data transfer methods, such as protocols and data formats are not my own as they are part of the Suite. I only parsed the data that was sent by the hardware and used the Speller as an input method to the platform.
+\vspace{\baselineskip}\newline
+When it comes to the applications used inside of the platform, they were coded and built by several teams from the West University of Timișoara during hackathons and other BCI competitions. I was part of some of the teams, but I cannot claim ownership of any application since creating them was a team effort and the application ownership is that of the teams themselves and not particular members. The applications themselves are detailed in section \ref{sect:Applications Used}.
+\vspace{\baselineskip}\newline
+To conclude foundational works, I want to touch on the plethora of research and papers used throughout this paper. None of the research mentioned or cited is my own and specific authors are listed in the bibliography section of this paper\ref{sec:bibliography}. The field of BCIs has seen a boom in popularity and research. Since 2019 there have been over 22,000 published papers about or related to Brain-Computer Interfacing\cite{bci_scholarly_articles}. While the theory in regards to the field of BCI may be lacklustre at times throughout this paper, this is necessary to ensure the information is digestible and on the topic of the project at hand. For any further reading, refer to the bibliography of this paper. Moreover, this paper doesn't bring any new academic research to the table but builds on existing research.
+
+
+\subsection{Personal Contributions}nal contribution to the subject at hand begins with the platform itself. I created the graphical user interface and wrote the logic behind it. I created the system for downloading and installing applications from Git Hub using the installer mentioned in this paper\ref{cap:installer} and programmed the platform to detect applications loaded using the install wizard or applications placed manually inside the platform app directory.
+\vspace{\baselineskip}\newline
+Using the Unicorn Speller and its executable file, I created a method for loading speller boards dynamically based on which application is opened to maximise compatibility with applications made by other users [see subsect. \ref{subsect:Board Change}].
+\vspace{\baselineskip}\newline
+One of the problems encountered during the making of the platform was UDP port binding and locking out input. To pass input from the platform to the application, I created a UDP relay [see sect. \ref{sect:UDP Relay}] inside the UDP listener so that the platform takes input first, parses it and then passes it forward to the open application.
+\vspace{\baselineskip}\newline
+As of my research at the time of writing this paper, there are no other BCI platforms for user-created applications, or at least no public ones readily available on the internet for the hardware used in this paper (the Unicorn BCI). By creating an open-sourced solution available for anyone to download, anybody can use it in different contexts. As it stands, g.tec's software is fairly rigid, not allowing hot-swapping boards and using multiple applications at once. In the making of the present solution, I remediated this issue and created a flexible solution in its place using Unicorn software.
+

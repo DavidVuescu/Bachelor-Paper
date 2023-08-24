@@ -6,21 +6,19 @@
 Even though the project and this work are complete, there is still room for growth and the possibility of adding new features and improving existing ones. In this chapter, we will explore possible future developments for both the platform itself and the installer tool.
 
 \section{Platform}
-\subsection{Dynamically Changing Boards}
-The biggest limitation in creating this project was the fact that Unicorn software doesn't let a developer change boards during the run-time of the P300 speller. This makes sense from a technical standpoint, as all sorts of bugs and unwanted behaviour could result from just flipping the board around while the speller program is in execution, but it is nonetheless something that can be improved upon.
-\vspace{\baselineskip}\newline
-An improvement in this sense could come from a smart script that changes boards dynamically when the user opens a new application. In this way, the main board can be simplified into several smaller boards, that aren't as tiring on the eyes and that could allow longer use of the platform without pause. Another way of realising this improvement could be through the use of external spellers or through the use of the Unity API from g.tec, which allows users to create smart Game Objects inside the engine that act just like items on a speller. 
-\vspace{\baselineskip}\newline
-There isn't one simple answer or way of improving upon this existing issue while keeping stability and functionality. This matter needs a lot more testing before it can be implemented into such an application, but it is nevertheless an improvement from which the platform could benefit.
-
 \subsection{Support for Different Spellers/BCIs}
 In trying to create a homogeneous system of compatible applications all linked through one and documenting it in this paper, only one BCI and one speller were used. Other research-oriented platforms have numerous integrations with a plethora of Brain-Computer Interfaces available on the market. In creating this paper, however, I was limited to only one piece of hardware, the BCI provided by Unicorn. While it was more than enough to create the platform and run the necessary tests, it can't be denied that in the future, the platform can be improved upon by developing integrations with other BCI hardware.
+
+\subsection{Integration with a Windows controller application}
+The application platform provides a lot of freedom to a disabled user, but a lot more freedom can be given still with the integration of a system that controls Windows. Such an application would use a speller board for mouse movements and clicks as well as a full QWERTY keyboard for interacting with the operating system. Due to the current structure of the platform, this control system can be easily integrated with the application platform and can be a fully-fledged component of the platform.
+\vspace{\baselineskip}\newline
+In the context of the current implementation, such a controller wasn't implemented because no implementation of such a system can be seamless with Windows and this thesis aims to create a simple, intuitive and seamless experience for the end-user. Nevertheless, such an addition would streamline the disabled user's access to other Windows features, while the platform can serve as a link to all the user's BCI applications 
 
 
 
 \section{Installer}
 \subsection{Over-the-Air Updates}
-Over-the-Air updates, or OTA updates for short are updates that do not require manual intervention from any user. They enable the user to receive firmware updates seamlessly via a network. They are most commonly used in Android and IOS updates, as well as Windows and other computer updates.
+Over-the-air updates, or OTA updates for short are updates that do not require manual intervention from any user. They enable the user to receive firmware updates seamlessly via a network. They are most commonly used in Android and IOS updates, as well as Windows and other computer updates.
 \vspace{\baselineskip}\newline
 While the installer is a useful tool for interfacing with batch scripts to download the platform and the applications, OTA updates could prove a wonderful improvement, so as to not have the user always checking for new versions in case new applications are made available for installation. This way, the installer can update itself by downloading the latest version of the installer binary from GitHub.
 
