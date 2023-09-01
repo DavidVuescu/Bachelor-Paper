@@ -6,19 +6,21 @@
 In this bachelor's thesis, the main objective is creating a BCI App Platform, meaning the creation of a program that can open other applications while interfacing with the Unicorn Hybrid Black, a Brain-Computer Interface, to receive input from a disabled user via a P300 speller. The user can navigate through his favourite applications which are displayed on the platform's graphical user interface using the Unicorn Speller, g.tec's implementation of the P300 speller. Using the speller, he can then select an application to launch and use for as long as he desires, after which he can once again close it through the speller's board by looking at its elements. The results show a stable application that can be used to navigate through compatible apps and open them with ease.
 
 \section{Platform Architecture}
-The application to be implemented makes use of a BCI Speller, namely the Unicorn Speller which is part of the Unicorn Suite Hybrid Black. This speller can only be used with the Unicorn Hybrid Black Brain-Computer Interface. The speller is used as the primary and only input method for a disabled user to interact with the application. The BCI headset sends its output (the item the user selected from the board) through a UDP server to a specific IP address and port combo specified in the speller settings. The application implements a UDP listener that runs as a background process of the application, waiting for input from the user. When the aforementioned input arrives, the listener sends it to the application which then interprets it accordingly.
+The platform application to be implemented makes use of a BCI Speller, namely the Unicorn Speller which is part of the Unicorn Suite Hybrid Black. This speller can only be used with the Unicorn Hybrid Black Brain-Computer Interface. The speller is used as the primary and only input method for a disabled user to interact with the application. The BCI headset sends its output (the item the user selected from the board) through a UDP server to a specific IP address and port combo specified in the speller settings. The application implements a UDP listener that runs as a background process of the application, waiting for input from the user. When the aforementioned input arrives, the listener sends it to the application which then interprets it accordingly.
 \vspace{\baselineskip}\newline
-The platform itself is a Unity application that when run fetches all BCI applications installed on the user's disk and displays them to the user so that he/she can select one. Once an application is selected, the platform simply runs it and locks all user input, as the applications housed inside also interface with the speller and by keeping input unlocked, the user may accidentally open multiple apps or cause other unwanted behaviour.
+The platform itself is a Unity application that when run fetches all BCI applications installed on the user's disk and displays them to the user so that he/she can select one. Once an application is selected, the platform opens the application's specific speller and relays all user input to it, as the applications housed inside also interface with the Unicorn Speller [see fig. \ref{fig:Platform use case diagram} \& \ref{fig:Platform Architectural Diagram}].
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{Diagrams/Use Case/Platform.jpg}
   \caption{Platform use case diagram}
+  \label{fig:Platform use case diagram}
 \end{figure}
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{Diagrams/Platform Architectural.png}
-  \caption{Architectural Diagram}
+  \caption{Platform Architectural Diagram}
+  \label{fig:Platform Architectural Diagram}
 \end{figure}
 
 
@@ -26,11 +28,11 @@ The platform itself is a Unity application that when run fetches all BCI applica
 The Platform is built and run using the Unity Engine and all scripting is done in the C\# programming language. The engine ensures great control over the UI elements on the front end of the application and stability in the back end.
 
 \subsection{Game Objects and UI}
- To display all the applications to the user, they need to be in a centralised location, where the platform can locate them and show them to the user. The location picked for this purpose is inside the User's Documents directory, in a directory called \textit{.bciapps}. Inside here, all applications sit in their separate folder. Furthermore, to automate the platform better, a similar file structure was used between each of the applications, where every application folder contains an \textit{app.exe} file, which is the app executable file called by the platform when the user decides to open that specific app, and another \textit{icon.png} which is that specific application's icon that is being displayed inside the platform to the user. This file structure is reminiscent of other software platforms, such as Steam, which use specific directories to store their applications.
+ To display all the applications to the user, they need to be in a centralised location, where the platform can locate them and show them to the user. The location picked for this purpose is inside the User's Documents directory, in a directory called \textit{.bciapps}. Inside here, all applications sit in their separate folder. Furthermore, to automate the platform better, a similar file structure was used between each of the applications [see sect. \ref{sect:Platform Folder Structure}]. This file structure is reminiscent of other software platforms, such as Steam, which use specific directories to store their applications.
 \subsubsection{The App Class}
 An App.cs file was created to store all information about a specific application present in the .bciapps folder. This class contains member variables for the application name as well as member variables for the absolute path of the app's executable file, its icon file and its board file. The class also contains a member function called run(), which is used to start the application when the user selects it and decides to do so via Unity's Process.Start() function.
 \subsubsection{App Prefabs and Management}
-\begin{lstlisting}[language={[Sharp]C}, caption={Manager.cs initialisation}, label={lst:Manager Init}]
+\begin{lstlisting}[language={[Sharp]C}, caption={Manager.cs initialization}, label={lst:Manager Init}]
 void Start() {
     userPath = getUserPath();
     string[] folders = Directory.GetDirectories(userPath);
@@ -59,11 +61,11 @@ void Start() {
 \end{lstlisting}
 
 
-An empty game object was created to house Manager.cs, a C\# script used to manage all apps. Another game object, a prefab, is created with a Sprite Renderer. This prefab will serve as the base for all app Game Objects when they get instantiated. 
+\noindent An empty game object was created to house Manager.cs, a C\# script used to manage all apps. Another game object, a prefab, is created with a Sprite Renderer. This prefab will serve as the base for all app Game Objects when they get instantiated. 
 \vspace{\baselineskip}\newline
 Before the main game loop starts, in the Start() function provided by Unity, this script browses the .bciapps directory and for each application, it creates a new App type object which it then stores in a list. The list of apps gets instantiated inside of a container Game Object, with each icon file getting transformed into a Texture2D type, which is then fed to the Sprite Renderer to display the icon to the user[see listing 3.1].
 
-To make the UI reflect the change in the user choice, the whole container Game Object in which the application instances are housed is moved with the user's input. This simple approach[see fig. \ref{fig:Unity object diagram}] using a container app makes it easier to instantiate all applications without having to worry about moving each one every time the user changes his/her selection.
+To make the UI reflect the change in the user choice, the whole container Game Object in which the application instances are housed is moved with the user's input. This simple approach [see fig. \ref{fig:Unity object diagram}] using a container app makes it easier to instantiate all applications without having to worry about moving each one every time the user changes his/her selection.
 
 \begin{figure}[H]
   \centering
@@ -88,7 +90,7 @@ To navigate the platform the user must look at one of the navigational buttons o
 
 
 \subsection{Changing Boards}\label{subsect:Board Change}
-The speller does not allow the hot-swap of speller boards by default. To combat this, a method was created to circumvent this limitation. Inside the method, the platform's 'default' speller board\ref{fig:default board} is started at the beginning of each platform run from the command line and starts taking user input as soon as it is initialised. This may take a few seconds as the board and its items load. Once the user selects an application, the default board is closed and the board of the specific application is opened. Once the user selects the 'kill app' command on the application board, both the opened application and the app's board are shut down, and the platform board is once again loaded to navigate through the applications present inside the platform. 
+The speller does not allow the hot-swap of speller boards by default. To combat this, a method was created to circumvent this limitation. Inside the method, the platform's 'default' speller board [see fig. \ref{fig:default board}] is started at the beginning of each platform run from the command line and starts taking user input as soon as it is initialised. This may take a few seconds as the board and its items load. Once the user selects an application, the default board is closed and the board of the specific application is opened. Once the user selects the 'kill app' command on the application board, both the opened application and the app's board are shut down, and the platform board is once again loaded to navigate through the applications present inside the platform. 
 \vspace{\baselineskip}\newline
 For this approach to work, each application's board needs to have a 'kill app' object to send a close signal to the main platform. An application will work without such an object, but the disabled user would have no way to close the application if he/she wants to. Additionally, the dynamically changing boards feature depends on the platform folder structure [see sect. \ref{sect:Platform Folder Structure}].
 \vspace{\baselineskip}\newline
@@ -96,11 +98,11 @@ For the implementation, a variable is used to store the process of the current b
 
 
 \subsection{Speller Receiver}\label{subsect:Speller Receiver}
-The Unicorn Speller outputs via network using UDP. To get the user's input signals, we must implement a UDP port listener that always listens on port 1000 (the default port of output on the speller). The network output of the speller sends a datagram with different data, from the speller version to the different flashing images that the selected item has. The part of the datagram that interests us for this implementation is OutputText. This text field is set inside the board configuration, with each item sending a different output text (eg. the item corresponding to the A letter on the QWERTY board has the output text also A). As with most board elements, this can be edited. For this implementation, the navigation of the speller board is given distinctive output text(such as SELECT and ALTF4). Inside the UDP listener, we search the message received through the port for these exact texts. Since the texts are long and unique, the risk of finding the exact text inside of a random message is minimal. If one of the text strings corresponding to a command is found inside of the UDP message, the command associated with it is executed inside of the platform[see fig. \ref{fig:platform navigation}]. In this way, we can pick up any relevant input from the BCI through the listener function.
+The Unicorn Speller outputs via network using UDP. To get the user's input signals, we must implement a UDP port listener that always listens on port 1000 (the default port of output on the speller). The network output of the speller sends a datagram with different data, from the speller version to the different flashing images that the selected item has. The part of the datagram that interests us for this implementation is OutputText. This text field is set inside the board configuration, with each item sending a different output text (eg. the item corresponding to the A letter on the QWERTY board has the output text also A). As with most board elements, this can be edited. For this implementation, the navigation of the speller board is given distinctive output text(such as SELECT and ALTF4). Inside the UDP listener, we search the message received through the port for these exact texts. Since the texts are long and unique, the risk of finding the exact text inside of a random message is minimal. If one of the text strings corresponding to a command is found inside of the UDP message, the command associated with it is executed inside of the platform [see fig. \ref{fig:platform navigation}]. In this way, we can pick up any relevant input from the BCI through the listener function.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=1\textwidth]{Diagrams/Sequence/Platform - Nav.png}
+  \includegraphics[width=0.9\textwidth]{Diagrams/Sequence/Platform - Nav.png}
   \caption{Platform navigation sequence diagram}
   \label{fig:platform navigation}
 \end{figure}
@@ -111,7 +113,7 @@ This UDP listener enables the user to interact with the platform by selecting, c
 \section{UDP Relay} \label{sect:UDP Relay}
 Seeing that each of the applications housed within the platform also implements a UDP listener, a relevant problem arises: as an application is opened by the platform, the opened app's listener binds to port 1000 (the default port on which the speller sends data through UDP) and overrides the platform's bind of the same port. Owning to this, the platform commands do not work while inside an application. For the navigation command, this is no issue, but the close application command also does not work, making the end user get stuck inside the first application he opens. One solution would be to implement a close application command inside each application and while some applications can accommodate this easily, this is overall a long and arduous fix.
 \vspace{\baselineskip}\newline
-Another way to fix this issue is by creating a UDP Relay method to first process the speller output inside of the platform application before sending the raw input to the application. To implement this, we must change the listener to port 1001 (or any other free port instead of 1000) and implement a method that takes in the raw data, creates a new UDP client and sends the data to port 1000 on which the open application is bound[see fig. \ref{fig:platform-app interaction}. With this method, both the application and the platform receive the data, with the platform taking precedence over the opened application].
+Another way to fix this issue is by creating a UDP Relay method to first process the speller output inside of the platform application before sending the raw input to the application. To implement this, we must change the listener to port 1001 (or any other free port instead of 1000) and implement a method that takes in the raw data, creates a new UDP client and sends the data to port 1000 on which the open application is bound [see fig. \ref{fig:platform-app interaction}. With this method, both the application and the platform receive the data, with the platform taking precedence over the opened application].
 
 \begin{figure}[H]
   \centering
@@ -155,7 +157,7 @@ The platform's graphical user interface is a simple one since the speller board 
 Before a disabled user can use the application on their own, an initial setup must be performed with the help of an able-bodied individual. This helper will need to first apply the headset to the head of the disabled person. After that is done, a calibration sequence must be run. It is important to run the sequence with as many flash cycles as possible to ensure the accuracy of the speller during the use of the platform. As mentioned above, the custom board must be loaded to interface with the platform. Other settings the users can tinker with are the duration between flashes, so that the user gets enough time to gaze at the app UI before returning to the speller, the number of flashes per item and the flashing patterns. All these settings are subjective to the user so fine-tuning is necessary.
 
 \subsection{Downloading the Platform and Apps}
-After the platform is downloaded or installed[see chapter \ref{cap:installer}], the user must install applications in the .bciapps file located in \textit{C:$\backslash$Users$\backslash$\%username\%$\backslash$Documents$\backslash$.bciapps}. This can be done either manually or using the installer[see Chapter 4]. For the applications to work with the platform, they must have a specific file layout and have speller boards similar to the one being used in the platform itself.
+After the platform is downloaded or installed [see chapter \ref{cap:installer}], the user must install applications in the .bciapps file located in \textit{C:$\backslash$Users$\backslash$\%username\%$\backslash$Documents$\backslash$.bciapps}. This can be done either manually or using the installer[see Chapter 4]. For the applications to work with the platform, they must have a specific file layout and have speller boards similar to the one being used in the platform itself.
 \subsection{Using the Platform}
 The platform can be run through its executable \textit{.exe} file. It is designed to run windowed and to run in the background so that the speller can be run alongside it on a secondary display. Now the disabled user can run and close apps at his/her leisure, until they get tired or wish to stop, at which point the application and speller, can just be exited out of. This can all be done through the speller boards, and the users must shift their vision from the speller window where the input is taken to the platform/application UI window where they can see what their inputs are doing. This can cause strain in the long run, so monitoring the user's state is an important step throughout use.
 
